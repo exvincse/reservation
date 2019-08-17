@@ -17,9 +17,9 @@
             <div class="none-week" v-for="i in lastMonthDays" :key="i+100" >{{lastmonthdate + i}}</div>
             <div v-for="day in nowmonthdate" :key="day"
               :class="{'out':noclick(day)}">
-              <a href="#" v-if="dayoverflow(day)"
+              <span href="#" v-if="dayoverflow(day)"
                 :class="{'bgb':dayoverflow(day)}"
-               >{{day}}</a>
+               >{{day}}</span>
               <span class="none-week" v-else>{{day}}</span>
             </div>
             <!-- <li v-for="day in nowmonthdate" :key="day"
@@ -104,20 +104,18 @@ export default {
     },
     dayoverflow(day) {
       let now = this.getdate(new Date());
-      if(this.nowdate.year < now.year){
+      if (this.nowdate.year < now.year) {
         return false;
-      }else {
-        if(this.nowdate.month < now.month){
-          return false
+      } else {
+        if(this.nowdate.year === now.year && this.nowdate.month < now.month){
+          return false;
         }else {
-          if(this.nowdate.month === now.month){
-            if(now.date <= day){
-              return true;
-            }else {
-              return false;
-            }
+          if (this.nowdate.month > now.month + 3 || this.nowdate.year > now.year) {
+            return false;
+          }else if(this.nowdate.month === now.month) {
+            return now.date <= day ? true : false;
           }else{
-            return true;
+            return (this.nowdate.month < now.month + 3 || now.date >= day) ? true : false;
           }
         }
       }
@@ -134,7 +132,6 @@ export default {
           }
       })
       if (a.length!==0) {
-        console.log(day,'true')
         return true
       } else {
         return false
