@@ -7,11 +7,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./views/Home'),
+      component: () => import('./views/Index'),
+    },
+    {
+      path: '/allroom',
+      component: () => import('./views/Allroom'),
     },
     {
       path: '/date',
-      component: () => import('./views/date'),
+      component: () => import('./views/Date'),
     },
     {
       path: '/moreroom/:id',

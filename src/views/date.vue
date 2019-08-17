@@ -15,9 +15,10 @@
         </div>
         <div class="date">
             <div class="none-week" v-for="i in lastMonthDays" :key="i+100" >{{lastmonthdate + i}}</div>
-            <div v-for="day in nowmonthdate" :key="day" >
-              <a href="#" @click.prevent="clickday(day)" v-if="dayoverflow(day)"
-                :class="{'bgb':dayoverflow(day),'bg-primary':hoverday(day)}"
+            <div v-for="day in nowmonthdate" :key="day"
+              :class="{'out':noclick(day)}">
+              <a href="#" v-if="dayoverflow(day)"
+                :class="{'bgb':dayoverflow(day)}"
                >{{day}}</a>
               <span class="none-week" v-else>{{day}}</span>
             </div>
@@ -35,7 +36,7 @@ export default {
     return {
        nowdate: {},
        lastmonthday: 0,
-       dayname:[],
+      //  dayname:[],
     };
   },
   created() {
@@ -54,35 +55,35 @@ export default {
     }
   },
   methods: {
-    clickday(day){
-      let arrmonth = null;
-      let arrday = null;
-      if(this.nowdate.month + 1 < 10){
-        arrmonth = `${'0' + (this.nowdate.month+1)}`;
-      } else {
-        arrmonth = `${this.nowdate.month+1}`;
-      }
-      day < 10 ? arrday = `${'0' + day}` : arrday = `${day}`;
-      if (this.dayname.includes(`${this.nowdate.year}-${arrmonth}-${arrday}`)) {
-        return;
-      } else {
-        this.dayname.push(`${this.nowdate.year}-${arrmonth}-${arrday}`);
-      }
-    },
-    hoverday(day){
-      let now = this.getdate(new Date());
-      let arrday = null;
-      let arrmonth = null;
-      let arryear = null;
-      let a = this.dayname.filter((item) => {
-        let i = item.split("-");
-        day < 10 ? arrday = `${'0' + day}`: arrday = `${day}`;
-        arryear = i[0];
-        arrmonth = i[1];
-        return (i[2] === arrday && Number(arryear) === this.nowdate.year && Number(arrmonth) === this.nowdate.month+1) ? true : false;
-      })
-      return (a.length !==0) ? true : false;
-    },
+    // clickday(day){
+    //   let arrmonth = null;
+    //   let arrday = null;
+    //   if(this.nowdate.month + 1 < 10){
+    //     arrmonth = `${'0' + (this.nowdate.month+1)}`;
+    //   } else {
+    //     arrmonth = `${this.nowdate.month+1}`;
+    //   }
+    //   day < 10 ? arrday = `${'0' + day}` : arrday = `${day}`;
+    //   if (this.dayname.includes(`${this.nowdate.year}-${arrmonth}-${arrday}`)) {
+    //     return;
+    //   } else {
+    //     this.dayname.push(`${this.nowdate.year}-${arrmonth}-${arrday}`);
+    //   }
+    // },
+    // hoverday(day){
+    //   let now = this.getdate(new Date());
+    //   let arrday = null;
+    //   let arrmonth = null;
+    //   let arryear = null;
+    //   let a = this.dayname.filter((item) => {
+    //     let i = item.split("-");
+    //     day < 10 ? arrday = `${'0' + day}`: arrday = `${day}`;
+    //     arryear = i[0];
+    //     arrmonth = i[1];
+    //     return (i[2] === arrday && Number(arryear) === this.nowdate.year && Number(arrmonth) === this.nowdate.month+1) ? true : false;
+    //   })
+    //   return (a.length !==0) ? true : false;
+    // },
     formatWeek (day) {
       switch (day) {                
         case 0:
@@ -121,23 +122,24 @@ export default {
         }
       }
     },
-    // noclick(day){
-    //   let ary = ['2019-10-1','2019-10-3','2019-10-7'];
-    //   let a = ary.filter((item) => {
-    //       if (day == undefined) return;
-    //       let a = item.split("-");
-    //       if(a[0]===this.nowdate.year.toString() && a[1]===(this.nowdate.month+1).toString() && a[2] === day.toString()){
-    //         return true;
-    //       } else {
-    //         return false;
-    //       }
-    //   })
-    //   if (a.length!==0) {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // },
+    noclick(day){
+      let ary = ['2019-10-1','2019-10-3','2019-10-7'];
+      let a = ary.filter((item) => {
+          if (day == undefined) return;
+          let a = item.split("-");
+          if(a[0]===this.nowdate.year.toString() && a[1]===(this.nowdate.month+1).toString() && a[2] === day.toString()){
+            return true;
+          } else {
+            return false;
+          }
+      })
+      if (a.length!==0) {
+        console.log(day,'true')
+        return true
+      } else {
+        return false
+      }
+    },
     getdate (date) {
       return {
         year: date.getFullYear(),
@@ -148,9 +150,9 @@ export default {
     },
     monthoverflow(year,month) {
       if (month === 0) {
-        return this.everymonth(year-1,month);
+        return this.everymonth(year-1,11);
       } else {
-        return this.everymonth(year,month);
+        return this.everymonth(year,month-1);
       }
     },
     everymonth(year, month) {
@@ -220,15 +222,9 @@ export default {
         margin-bottom: 5px;
     }
     .date,.week{
-        div{
-          font-size: 14px;
-          width: 40px;
-          height: 30px;
-          text-align: center;
-          a{
-            text-decoration: none;
-          }
-        }
+      a{
+        text-decoration: none;
+      }
     }
     .none-week {
         color: #C9CCD0;

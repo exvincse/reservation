@@ -1,0 +1,168 @@
+.room-bg{
+	background-position: center;
+	background-size: cover;
+}
+.linear-pos{
+	position: relative;
+	.white-space{
+		border: 1px solid $white;
+		background-color: #E1E1E1;
+		height: 148px;
+		width: 148px;
+		color: $white;
+		letter-spacing: 3.24px;
+		line-height: 44px;
+		font-size: 31px;
+		z-index: 9999;
+	}
+}
+.linear,.menu-linear,.number-linear{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	height: 138px;
+	width: 138px;
+	background: linear-gradient(45deg, rgba(255,255,255,0.28) 25%, $white 0, $white 50%, rgba(255,255,255,0.28) 0, rgba(255,255,255,0.28) 75%, $white 0); 
+	background-size: 5px 5px;
+}
+.date{
+	div{
+		font-size: 14px;
+		width: 40px;
+		height: 30px;
+		text-align: center;
+	}
+}
+.out{
+	background: linear-gradient(45deg, $lgray 25%, $white 0, $white 50%, $lgray 0, $lgray 75%, $white 0); 
+	background-size: 5px 5px;
+}
+
+.week div{
+	font-size: 14px;
+	width: 40px;
+	height: 30px;
+	text-align: center;
+}
+.menu{
+	width: 305px;
+	margin-top: -20px;
+	position: relative;
+	.menu-linear{
+		width: 281px;
+		left: 24px;
+    top: 284px;
+	}
+	ul>li{
+		list-style: none;
+		margin-bottom: 30px;
+		&:last-child{
+			margin-bottom: 0px;
+		}
+		a{
+			font-size: $primary-font;
+			text-decoration: none;
+			color: $black;
+			position: relative;
+			&:hover{
+				&::before{
+					display: block;
+				}
+			}
+			&::before{
+				display: none;
+				position: absolute;
+				content: '';
+				width: 8px;
+				height: 1px;
+				background-color: $black;
+				left: -20px;
+				top: 10px;
+			}
+		}
+	}
+}
+.room-number{
+	color: $white;
+	.number{
+		font-size: 4rem;
+	}
+	.name{
+		font-size: 1.5rem;
+	}
+	.number-linear{
+		width: 86px;
+		height: 19px;
+		top: 68px;
+    left: -5px;
+	}
+}
+.msg{
+	color: $white;
+	.link{
+		color: $white;
+		text-decoration: none;
+	}
+}
+.messsage{
+	position: relative;
+	.content{
+		z-index: 1000;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		.white-space{
+			position: relative;
+			z-index: 9999;
+		}
+		.linear{
+			top: 27px;
+    	left: 131px;
+		}
+	}
+}
+.link-border{
+	border-right: 1px solid $white;
+	line-height: 88px;
+}
+.l-margin{
+	position: relative;
+	margin-top: -100px;
+	z-index: 1000;
+}
+.card-pos{
+	position: relative;
+	.kind{
+		font-size: ($font-size-base)-2px;
+		.room{
+			color: $allroom;
+		}
+	}
+	&:hover{
+		.trans{
+			transform: translateY(-85px);
+			transition: 0.7s;
+		}
+	}
+	.goroom{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+.trans{
+	background: #F7F7F7;
+	// box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
+	transform: translateY(0px);
+	transition: 0.7s;
+}
+.price{
+	.today{
+		font-size: ($font-size-base)+7px;
+	}
+	.holiday{
+		color: $allroom; 
+	}
+}
