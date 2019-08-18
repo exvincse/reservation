@@ -14,10 +14,6 @@ export default new Router({
       component: () => import('./views/Allroom'),
     },
     {
-      path: '/date',
-      component: () => import('./views/Date'),
-    },
-    {
       path: '/moreroom/:id',
       component: () => import('./views/Moreroom'),
     },

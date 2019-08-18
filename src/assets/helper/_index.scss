@@ -166,3 +166,108 @@
 		color: $allroom; 
 	}
 }
+
+.light-box{
+	position: relative;
+	box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
+	.header-title{
+		font-size: ($font-size-base) + 4px;
+		position: absolute;
+		top: 50px;
+		left: 50px;
+		border: 1px solid $black;
+		letter-spacing: 1.88px;
+		line-height: 44px;
+		background-color: $lgray;
+		z-index: 10;
+	}
+	.header-linear{
+		position: absolute;
+		top: 40px;
+    left: 40px;
+		width: 140px;
+		height: 43px;
+		background: linear-gradient(45deg, $black 25%, $white 0, $white 50%, $black 0, $black 75%, $white 0); 
+		background-size: 5px 5px;
+		z-index: 1;
+	}
+	a{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+}
+.room-msg{
+	.title{
+		font-size: ($font-size-base*2) + 8px;
+	}
+	.description{
+		font-size: ($font-size-base) - 2px;
+		line-height: 20px;
+		letter-spacing: 1.25px;
+	}
+	.room-mark{
+	}
+	.checktime{
+		.checkin{
+			margin-right: 5rem;
+		}
+		.checktitle{
+			letter-spacing: 1.46px;
+		}
+		.time{
+			font-size: ($font-size-base) + 7px;
+			letter-spacing: 2.19px;
+		}
+	}
+}
+.amenities{
+	background-color: $navygray;
+	i{
+		width: 30px;
+		height: 30px;
+	}
+	.iconcolor{
+		color:$iconcolor;
+	}
+}
+.btn-time{
+	position: relative;
+	.btn{
+		position: relative;
+		background: #575757;
+		color:$white;
+		z-index: 10;
+	}
+}
+.btn-bg{
+	position: absolute;
+	width: 88px;
+	height: 40px;
+	top: 3px;
+	left: 7px;
+	background: linear-gradient(45deg, $black 25%, $white 0, $white 50%, $black 0, $black 75%, $white 0); 
+	background-size: 5px 5px;
+	z-index: 1;
+}
+.coustomdate{
+	max-width: 116px;
+}
+.date-pos{
+	position: relative;
+	.start{
+		position: absolute;
+		top: 50px;
+    left: -84px;
+	}
+	.end{
+		position: absolute;
+		top: 50px;
+    right: -105px;
+	}
+}
+.total{
+	background: #EDEDED;
+}

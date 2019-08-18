@@ -1,57 +1,59 @@
 <template>
-  <div class="room-bg"
-    :style="{backgroundImage:`url(${this.NowRoomMsg.imgurl})`}">
-    <div class="d-flex flex-column justify-content-between p-5 h-100">
-      <div class="d-flex justify-content-between linear-pos mb-5">
-        <div class="white-space p-4">
-          White<br>Space
-        </div>
-        <div class="linear"></div>
-
-        <div class="menu bg-white py-4 px-5">
-          <div class="menu-linear"></div>
-          <ul class="p-0">
-            <li>
-              <router-link to="/allroom">ALL Room</router-link>
-            </li>
-            <li v-for="(item,index) in allroom" :key="item.id">
-              <a href="#"
-                @mouseover="more(index,item.name)"
-                @click.prevent="gomoreroom(item.id)">{{item.name}}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-between">
-        <div class="room-number">
-          <div class="number linear-pos">
-            <div class="number-linear"></div>
-            {{this.NowRoomMsg.id}}
+  <div v-if="allroom">
+    <div class="room-bg"
+      :style="{backgroundImage:`url(${this.NowRoomMsg.imgurl})`}">
+      <div class="d-flex flex-column justify-content-between p-5 h-100">
+        <div class="d-flex justify-content-between linear-pos mb-5">
+          <div class="white-space p-4">
+            White<br>Space
           </div>
-          <div class="name">{{this.NowRoomMsg.name}}</div>
-        </div>
-        <div class="msg d-flex flex-column justify-content-between">
-          <div>
-            <a href="#" class="mr-2 link">
-              <i class="fab fa-facebook-square fa-lg"></i>
-            </a>
-            <a href="#" class="link">
-              <i class="fab fa-instagram fa-lg"></i>
-            </a>
+          <div class="linear"></div>
+
+          <div class="menu bg-white py-4 px-5">
+            <div class="menu-linear"></div>
+            <ul class="p-0">
+              <li>
+                <router-link to="/allroom">ALL Room</router-link>
+              </li>
+              <li v-for="(item,index) in allroom" :key="item.id">
+                <a href="#"
+                  @mouseover="more(index,item.name)"
+                  @click.prevent="gomoreroom(item.id)">{{item.name}}</a>
+              </li>
+            </ul>
           </div>
-          <div>
-            <div class="mb-2">
-              <i class="fas fa-phone-alt"></i>
-              <span class="ml-2">02-17264937</span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <div class="room-number">
+            <div class="number linear-pos">
+              <div class="number-linear"></div>
+              {{this.NowRoomMsg.id}}
             </div>
-            <div class="mb-2">
-              <i class="fas fa-envelope"></i>
-              <span class="ml-2">whitespace@whitespace.com.tw</span>
+            <div class="name">{{this.NowRoomMsg.name}}</div>
+          </div>
+          <div class="msg d-flex flex-column justify-content-between">
+            <div>
+              <a href="#" class="mr-2 link">
+                <i class="fab fa-facebook-square fa-lg"></i>
+              </a>
+              <a href="#" class="link">
+                <i class="fab fa-instagram fa-lg"></i>
+              </a>
             </div>
             <div>
-              <i class="fas fa-home"></i>
-              <span class="ml-2">台北市羅斯福路十段30號</span>
+              <div class="mb-2">
+                <i class="fas fa-phone-alt"></i>
+                <span class="ml-2">02-17264937</span>
+              </div>
+              <div class="mb-2">
+                <i class="fas fa-envelope"></i>
+                <span class="ml-2">whitespace@whitespace.com.tw</span>
+              </div>
+              <div>
+                <i class="fas fa-home"></i>
+                <span class="ml-2">台北市羅斯福路十段30號</span>
+              </div>
             </div>
           </div>
         </div>

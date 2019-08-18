@@ -45,7 +45,9 @@ $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 $lgray: rgb(226, 224, 224) !default;
+$navygray: #F0F0F0 !default;
 $allroom: #6D7278 !default;
+$iconcolor: #C9CCD0 !default;
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $colors: map-merge(
@@ -141,7 +143,8 @@ $spacers: map-merge(
     2: ($spacer * .5),
     3: $spacer,
     4: ($spacer * 1.5),
-    5: ($spacer * 3)
+    5: ($spacer * 3),
+    6: ($spacer * 4.5),
   ),
   $spacers
 );
@@ -152,6 +155,7 @@ $sizes: () !default;
 $sizes: map-merge(
   (
     25: 25%,
+    35: 35%,
     50: 50%,
     75: 75%,
     100: 100%,

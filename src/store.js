@@ -9,9 +9,14 @@ export default new Vuex.Store({
   state: {
     allroom: [],
     moreroom: [],
+    isLoading: false,
   },
   actions: {
+    updateLoading (context, payload) {
+      context.commit('LOADING', payload);
+    },
     getroom (context) {
+      context.commit('LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_APIPATH}/rooms`;
       axios.get(api, {
         headers: {
@@ -20,9 +25,11 @@ export default new Vuex.Store({
         },
       }).then((response) => {
         context.commit('ALLROOM',response.data.items);
+        context.commit('LOADING', false, { root: true });
       });
     },
     getmoreroom (context,id) {
+      context.commit('LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_APIPATH}/room/${id}`;
       return new Promise((resolve) => {
         axios.get(api, {
@@ -32,6 +39,7 @@ export default new Vuex.Store({
           },
         }).then((response) => {
           context.commit('MOREROOM',response.data.room);
+          context.commit('LOADING', false, { root: true });
           resolve();
         });
       })
@@ -43,7 +51,10 @@ export default new Vuex.Store({
     },
     MOREROOM(state,payload) {
       state.moreroom = payload;
-    }
+    },
+    LOADING (state, payload) {
+      state.isLoading = payload
+    },
   },
   getters: {
     allroom(state) {
@@ -51,6 +62,9 @@ export default new Vuex.Store({
     },
     moreroom(state) {
       return state.moreroom;
+    },
+    loading (state) {
+      return state.isLoading
     }
   }
 });

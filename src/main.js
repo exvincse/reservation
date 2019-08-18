@@ -5,11 +5,14 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'swiper/dist/css/swiper.css'
+import Lightbox from 'vue-easy-lightbox'
+
+Vue.use(Lightbox);
 Vue.use(VueAwesomeSwiper);
 
 Vue.use(VueAxios, axios);
