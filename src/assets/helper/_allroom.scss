@@ -1,0 +1,62 @@
+.messsage{
+	position: relative;
+	.content{
+		z-index: 1000;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		.white-space{
+			position: relative;
+			z-index: 9999;
+		}
+		.linear{
+			top: 27px;
+    	left: 131px;
+		}
+	}
+}
+.link-border{
+	border-right: 1px solid $white;
+	line-height: 88px;
+}
+.l-margin{
+	position: relative;
+	margin-top: -100px;
+	z-index: 1000;
+}
+.card-pos{
+	position: relative;
+	.kind{
+		font-size: ($font-size-base)-2px;
+		.room{
+			color: $allroom;
+		}
+	}
+	&:hover{
+		.trans{
+			transform: translateY(-85px);
+			transition: 0.7s;
+		}
+	}
+	.goroom{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+.trans{
+	background: #F7F7F7;
+	// box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
+	transform: translateY(0px);
+	transition: 0.7s;
+}
+.price{
+	.today{
+		font-size: ($font-size-base)+7px;
+	}
+	.holiday{
+		color: $allroom; 
+	}
+}

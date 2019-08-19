@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="allroom.length">
     <div class="messsage">
       <div class="content p-5 linear-pos">
         <div class="white-space p-4 mx-auto">

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="allroom">
+  <div v-if="allroom.length">
     <div class="room-bg"
       :style="{backgroundImage:`url(${this.NowRoomMsg.imgurl})`}">
       <div class="d-flex flex-column justify-content-between p-5 h-100">

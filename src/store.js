@@ -8,14 +8,15 @@ export default new Vuex.Store({
   strict: true,
   state: {
     allroom: [],
-    moreroom: [],
+    moreroom: {},
+    bad: [],
     isLoading: false,
   },
   actions: {
-    updateLoading (context, payload) {
+    updateLoading(context, payload) {
       context.commit('LOADING', payload);
     },
-    getroom (context) {
+    getroom(context) {
       context.commit('LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_APIPATH}/rooms`;
       axios.get(api, {
@@ -28,7 +29,7 @@ export default new Vuex.Store({
         context.commit('LOADING', false, { root: true });
       });
     },
-    getmoreroom (context,id) {
+    getmoreroom(context,id) {
       context.commit('LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_APIPATH}/room/${id}`;
       return new Promise((resolve) => {
@@ -38,7 +39,7 @@ export default new Vuex.Store({
             'Authorization':`Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
           },
         }).then((response) => {
-          context.commit('MOREROOM',response.data.room);
+          context.commit('MOREROOM',response.data);
           context.commit('LOADING', false, { root: true });
           resolve();
         });
@@ -50,9 +51,13 @@ export default new Vuex.Store({
       state.allroom = payload;
     },
     MOREROOM(state,payload) {
-      state.moreroom = payload;
+      state.bad = [];
+      payload.booking.forEach((item) => {
+        state.bad.push(item.date);
+      })
+      state.moreroom = payload.room[0];
     },
-    LOADING (state, payload) {
+    LOADING(state, payload) {
       state.isLoading = payload
     },
   },
@@ -60,11 +65,11 @@ export default new Vuex.Store({
     allroom(state) {
       return state.allroom;
     },
-    moreroom(state) {
+    room(state) {
       return state.moreroom;
     },
-    loading (state) {
-      return state.isLoading
+    loading(state) {
+      return state.isLoading;
     }
   }
 });

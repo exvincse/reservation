@@ -1,3 +1,6 @@
+html,body{
+	font-family: NotoSansCJKtc-Light,Microsoft JhengHei;
+}
 .room-bg{
 	background-position: center;
 	background-size: cover;
@@ -34,7 +37,7 @@
 	}
 }
 .out{
-	background: linear-gradient(45deg, $lgray 25%, $white 0, $white 50%, $lgray 0, $lgray 75%, $white 0); 
+	background: linear-gradient(45deg, $allroom 25%, $white 0, $white 50%, $allroom 0, $allroom 75%, $white 0); 
 	background-size: 5px 5px;
 }
 
@@ -103,171 +106,4 @@
 		color: $white;
 		text-decoration: none;
 	}
-}
-.messsage{
-	position: relative;
-	.content{
-		z-index: 1000;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		.white-space{
-			position: relative;
-			z-index: 9999;
-		}
-		.linear{
-			top: 27px;
-    	left: 131px;
-		}
-	}
-}
-.link-border{
-	border-right: 1px solid $white;
-	line-height: 88px;
-}
-.l-margin{
-	position: relative;
-	margin-top: -100px;
-	z-index: 1000;
-}
-.card-pos{
-	position: relative;
-	.kind{
-		font-size: ($font-size-base)-2px;
-		.room{
-			color: $allroom;
-		}
-	}
-	&:hover{
-		.trans{
-			transform: translateY(-85px);
-			transition: 0.7s;
-		}
-	}
-	.goroom{
-		position: absolute;
-		top: 0;
-		width: 100%;
-		height: 100%;
-	}
-}
-.trans{
-	background: #F7F7F7;
-	// box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
-	transform: translateY(0px);
-	transition: 0.7s;
-}
-.price{
-	.today{
-		font-size: ($font-size-base)+7px;
-	}
-	.holiday{
-		color: $allroom; 
-	}
-}
-
-.light-box{
-	position: relative;
-	box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
-	.header-title{
-		font-size: ($font-size-base) + 4px;
-		position: absolute;
-		top: 50px;
-		left: 50px;
-		border: 1px solid $black;
-		letter-spacing: 1.88px;
-		line-height: 44px;
-		background-color: $lgray;
-		z-index: 10;
-	}
-	.header-linear{
-		position: absolute;
-		top: 40px;
-    left: 40px;
-		width: 140px;
-		height: 43px;
-		background: linear-gradient(45deg, $black 25%, $white 0, $white 50%, $black 0, $black 75%, $white 0); 
-		background-size: 5px 5px;
-		z-index: 1;
-	}
-	a{
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-	}
-}
-.room-msg{
-	.title{
-		font-size: ($font-size-base*2) + 8px;
-	}
-	.description{
-		font-size: ($font-size-base) - 2px;
-		line-height: 20px;
-		letter-spacing: 1.25px;
-	}
-	.room-mark{
-	}
-	.checktime{
-		.checkin{
-			margin-right: 5rem;
-		}
-		.checktitle{
-			letter-spacing: 1.46px;
-		}
-		.time{
-			font-size: ($font-size-base) + 7px;
-			letter-spacing: 2.19px;
-		}
-	}
-}
-.amenities{
-	background-color: $navygray;
-	i{
-		width: 30px;
-		height: 30px;
-	}
-	.iconcolor{
-		color:$iconcolor;
-	}
-}
-.btn-time{
-	position: relative;
-	.btn{
-		position: relative;
-		background: #575757;
-		color:$white;
-		z-index: 10;
-	}
-}
-.btn-bg{
-	position: absolute;
-	width: 88px;
-	height: 40px;
-	top: 3px;
-	left: 7px;
-	background: linear-gradient(45deg, $black 25%, $white 0, $white 50%, $black 0, $black 75%, $white 0); 
-	background-size: 5px 5px;
-	z-index: 1;
-}
-.coustomdate{
-	max-width: 116px;
-}
-.date-pos{
-	position: relative;
-	.start{
-		position: absolute;
-		top: 50px;
-    left: -84px;
-	}
-	.end{
-		position: absolute;
-		top: 50px;
-    right: -105px;
-	}
-}
-.total{
-	background: #EDEDED;
 }
