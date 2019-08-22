@@ -1,6 +1,3 @@
-html,body{
-	font-family: NotoSansCJKtc-Light,Microsoft JhengHei;
-}
 .room-bg{
 	background-position: center;
 	background-size: cover;
@@ -15,7 +12,7 @@ html,body{
 		color: $white;
 		letter-spacing: 3.24px;
 		line-height: 44px;
-		font-size: 31px;
+		font-size: $font-size-base * 1.9375;
 		z-index: 9999;
 	}
 }
@@ -30,7 +27,6 @@ html,body{
 }
 .date{
 	div{
-		font-size: 14px;
 		width: 40px;
 		height: 30px;
 		text-align: center;
@@ -42,7 +38,6 @@ html,body{
 }
 
 .week div{
-	font-size: 14px;
 	width: 40px;
 	height: 30px;
 	text-align: center;
@@ -54,7 +49,7 @@ html,body{
 	.menu-linear{
 		width: 281px;
 		left: 24px;
-    top: 284px;
+    	top: 253px;
 	}
 	ul>li{
 		list-style: none;
@@ -88,16 +83,16 @@ html,body{
 .room-number{
 	color: $white;
 	.number{
-		font-size: 4rem;
+		font-size: $font-size-base*4;
 	}
 	.name{
-		font-size: 1.5rem;
+		font-size: $font-size-base*1.5;
 	}
 	.number-linear{
 		width: 86px;
 		height: 19px;
 		top: 68px;
-    left: -5px;
+    	left: -5px;
 	}
 }
 .msg{

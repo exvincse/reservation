@@ -1,4 +1,5 @@
 module.exports = {
+    "root": true,
     "env": {
         "browser": true,
         "es6": true,
@@ -6,6 +7,7 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
+        "@vue/airbnb",
         "plugin:vue/essential"
     ],
     "globals": {
@@ -14,19 +16,30 @@ module.exports = {
     },
     "parserOptions": {
         "ecmaVersion": 2018,
-        "sourceType": "module",
-        "parser": "babel-eslint"
+        "sourceType": "module"
     },
     "plugins": [
         "vue"
     ],
     "rules": {
-        "max-len": [
-					"error",
-							{
-							"code": 300
-							}
-					],
-					"no-tabs": "off"
+      "max-len": [
+        "error",
+          {
+            "code": 300
+          }
+        ],
+      "no-tabs": "off",
+      "no-alert": "off",
+      "no-plusplus": ['error', { "allowForLoopAfterthoughts": true }],
+      "space-unary-ops": [
+        2, {
+          "words": true,
+          "nonwords": false,
+          "overrides": {
+            "new": false,
+            "++": true
+          }
+      }],
+      "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     }
 };

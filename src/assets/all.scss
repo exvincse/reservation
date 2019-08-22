@@ -1,6 +1,9 @@
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/bootstrap";
 @import "helper/variables";
+@import "~bootstrap/scss/bootstrap";
 @import "helper/index";
 @import "helper/allroom";
 @import "helper/singleroom";
+body{
+    font-size: $font-size-base * 0.875;
+}

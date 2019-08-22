@@ -2,7 +2,7 @@
   <div v-if="allroom.length">
     <div class="room-bg"
       :style="{backgroundImage:`url(${this.NowRoomMsg.imgurl})`}">
-      <div class="d-flex flex-column justify-content-between p-5 h-100">
+      <div class="d-flex flex-column justify-content-between py-5 pl-7 pr-0 h-100">
         <div class="d-flex justify-content-between linear-pos mb-5">
           <div class="white-space p-4">
             White<br>Space
@@ -11,7 +11,7 @@
 
           <div class="menu bg-white py-4 px-5">
             <div class="menu-linear"></div>
-            <ul class="p-0">
+            <ul class="p-0 mb-0">
               <li>
                 <router-link to="/allroom">ALL Room</router-link>
               </li>
@@ -32,7 +32,7 @@
             </div>
             <div class="name">{{this.NowRoomMsg.name}}</div>
           </div>
-          <div class="msg d-flex flex-column justify-content-between">
+          <div class="msg d-flex flex-column justify-content-between mr-4">
             <div>
               <a href="#" class="mr-2 link">
                 <i class="fab fa-facebook-square fa-lg"></i>
@@ -64,10 +64,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
-      chooseimg:[
+      chooseimg: [
         'https://images.unsplash.com/photo-1526880792616-4217886b9dc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
         'https://images.unsplash.com/photo-1528908929486-dfaa209c6986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
         'https://images.unsplash.com/photo-1533759413974-9e15f3b745ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80',
@@ -78,7 +79,7 @@ export default {
       NowRoomMsg: {
         id: '01',
         imgurl: 'https://images.unsplash.com/photo-1526880792616-4217886b9dc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-        name: 'Single Room'
+        name: 'Single Room',
       },
     };
   },
@@ -90,16 +91,16 @@ export default {
   },
   methods: {
     ...mapActions(['getroom']),
-    more(id,name) {
+    more(id, name) {
       this.NowRoomMsg = {
-        id : `0${id + 1}`,
+        id: `0${id + 1}`,
         imgurl: this.chooseimg[id],
         name,
-      }
+      };
     },
-    gomoreroom (id) {
-      this.$router.push(`/moreroom/${id}`)
-    }
+    gomoreroom(id) {
+      this.$router.push(`/moreroom/${id}`);
+    },
   },
-}
+};
 </script>

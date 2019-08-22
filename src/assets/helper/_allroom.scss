@@ -12,7 +12,7 @@
 		}
 		.linear{
 			top: 27px;
-    	left: 131px;
+    		left: 131px;
 		}
 	}
 }
@@ -28,14 +28,14 @@
 .card-pos{
 	position: relative;
 	.kind{
-		font-size: ($font-size-base)-2px;
+		font-size: $font-size-base*0.75;
 		.room{
 			color: $allroom;
 		}
 	}
 	&:hover{
 		.trans{
-			transform: translateY(-85px);
+			transform: translateY(-90px);
 			transition: 0.7s;
 		}
 	}
@@ -54,7 +54,7 @@
 }
 .price{
 	.today{
-		font-size: ($font-size-base)+7px;
+		font-size: $font-size-base*1.3125;
 	}
 	.holiday{
 		color: $allroom; 

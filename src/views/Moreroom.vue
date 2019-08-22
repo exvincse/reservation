@@ -144,11 +144,14 @@
         </div>
         <div class="col-lg-4">
           <datepeacker class="mb-4"
-            :bad="bad"></datepeacker>
-          <span class="out d-inline-block" style="width:20px;height:20px"></span>
-          <span class="d-inline-block">代表已被預約。</span>
-          <span class="d-inline-block">可預約時間為現在時間後推90天左右</span>
-          <span class="mb-4 d-inline-block">如果被預約超過90天，就無法再訂房</span>
+            :bad="bad"
+            ref="datepeacker"></datepeacker>
+            <div class="d-flex flex-wrap">
+              <span class="out d-inline-block" style="width:20px;height:20px"></span>
+              <span class="d-inline-block">代表已被預約。</span>
+            </div>
+            <span class="d-inline-block">可預約時間為現在時間後推90天左右</span>
+            <span class="mb-4 d-inline-block">如果被預約超過90天，就無法再訂房</span>
           <div class="d-flex">
             <div class="btn-time mr-3">
               <button class="btn rounded-0" data-toggle="modal" data-target="#Modal1">預約時段</button>
@@ -168,40 +171,71 @@
         <div class="modal-content rounded-0">
           <div class="modal-header p-4">
             <h5 class="modal-title" id="ModalLabel">預約時段</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal"
+              @click="errors.clear()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="px-4 pt-4">\ \ \</div>
           <div>
             <form class="p-4">
-                <div class="form-group d-flex align-items-center">
+                <div class="form-group d-flex flex-wrap align-items-center">
                   <label for="inputEmail3" class="col-form-label mr-5">姓名</label>
                   <input type="text" class="form-control w-75" id="inputEmail3"
-                  v-model="name">
+                  :class="{'is-invalid': errors.has('name')}"
+                  v-model="name"
+                  name="name"
+                  placeholder="輸入姓名"
+                  v-validate.persist="'required'">
+                  <div class="text-danger text-center w-100"
+                        v-if="errors.has('name')">姓名不得為空</div>
                 </div>
-                <div class="form-group d-flex align-items-center">
+                <div class="form-group d-flex flex-wrap align-items-center">
                   <label for="inputPassword3" class="col-form-label mr-5">電話</label>
                   <input type="phone" class="form-control w-75" id="inputPassword3"
-                  v-model="phone">
+                  :class="{'is-invalid': errors.has('phone')}"
+                  v-model="phone"
+                  name="phone"
+                  placeholder="輸入電話"
+                  v-validate.persist="'required'">
+                <span class="text-danger text-center w-100"
+                      v-if="errors.has('phone')">電話不得為空</span>
                 </div>
-                <div class="form-group d-flex align-items-center date-pos">
+                <div class="form-group d-flex flex-wrap  date-pos">
                   <label class="col-form-label mr-3">預約起迄</label>
-                    <input type="text" class="form-control coustomdate" id="inputEmail3"
-                      v-model="startdata"
-                      @click="openstart=!openstart,openend=false">
-                    <customdate class="start p-0"
-                      :bad="bad"
-                      v-if="openstart"
-                      @chooseday="startday"></customdate>
-                    <div class="mx-5">~</div>
-                    <input type="text" class="form-control coustomdate" id="inputEmail3"
-                      v-model="enddata"
-                      @click="openend=!openend,openstart=false">
-                    <customdate class="end p-0"
-                      :bad="bad"
-                      v-if="openend"
-                      @chooseday="endday"></customdate>
+                    <div>
+                        <input type="text" class="form-control coustomdate" id="inputEmail3"
+                        v-model="startdata"
+                        readonly="readonly"
+                        @click="openstart=!openstart,openend=false"
+                        :class="{'is-invalid': errors.has('start')}"
+                        name="start"
+                        placeholder="選擇訂房時間"
+                        v-validate.persist="'required'">
+                      <span class="text-danger text-center w-100"
+                            v-if="errors.has('start')">訂房時間不得為空</span>
+                      <customdate class="start p-0"
+                        :bad="bad"
+                        v-if="openstart"
+                        @chooseday="startday"></customdate>
+                    </div>
+                    <div class="mx-3">~</div>
+                    <div>
+                      <input type="text" class="form-control coustomdate" id="inputEmail3"
+                        v-model="enddata"
+                        readonly="readonly"
+                        @click="openend=!openend,openstart=false"
+                        :class="{'is-invalid': errors.has('end')}"
+                          name="end"
+                          placeholder="選擇訂房時間"
+                          v-validate.persist="'required'">
+                        <span class="text-danger"
+                              v-if="errors.has('end')">訂房時間不得為空</span>
+                      <customdate class="end p-0"
+                        :bad="bad"
+                        v-if="openend"
+                        @chooseday="endday"></customdate>
+                    </div>
                 </div>
             </form>
               <div class="total p-4">
@@ -221,7 +255,8 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn mr-auto rounded-0" data-dismiss="modal" style="background-color:#D8D8D8">取消</button>
+            <button type="button" class="btn mr-auto rounded-0" data-dismiss="modal" style="background-color:#D8D8D8"
+             @click="errors.clear()">取消</button>
             <button type="button" class="btn rounded-0"
               style="background-color:#484848; color:#fff"
               @click.prevent="checkrequest()">確定預約</button>
@@ -229,7 +264,6 @@
         </div>
       </div>
     </div>
-    
     <div class="modal fade" id="Modal2" tabindex="-1">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-0">
@@ -262,13 +296,14 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import VueEasyLightbox from 'vue-easy-lightbox'
-import datepeacker from './Date';
-import customdate from './Customdate';
 import { mapGetters } from 'vuex';
+import $ from 'jquery';
+import VueEasyLightbox from 'vue-easy-lightbox';
+import datepeacker from './Date.vue';
+import customdate from './Customdate.vue';
+
 export default {
-  components:{
+  components: {
     datepeacker,
     customdate,
     VueEasyLightbox,
@@ -283,7 +318,7 @@ export default {
       date: [],
       normalDay: 0,
       normalDayPrice: 0,
-      holiDay:0,
+      holiDay: 0,
       holiDayPrice: 0,
       visible: false,
       openstart: false,
@@ -304,17 +339,17 @@ export default {
     },
     startdata() {
       this.reservation();
-    }
+    },
   },
   computed: {
     ...mapGetters(['room']),
   },
-   methods: {
-    getroom () {
-      this.startdata = '',
-      this.enddata = '',
-      this.name = '',
-      this.phone = '',
+  methods: {
+    getroom() {
+      this.startdata = '';
+      this.enddata = '';
+      this.name = '';
+      this.phone = '';
       this.datashow = false;
       this.$store.dispatch('updateLoading', true);
       this.$store.dispatch('getmoreroom', this.$route.params.id).then(() => {
@@ -323,6 +358,16 @@ export default {
         this.holiDayPrice = this.$store.state.moreroom.holidayPrice;
         this.datashow = true;
         this.$store.dispatch('updateLoading', false);
+        this.$nextTick(() => {
+          const defaultdate = this.$refs.datepeacker.getdate(new Date());
+          if (defaultdate.month < 9) {
+            defaultdate.month = `0${defaultdate.month + 1}`;
+          } else {
+            defaultdate.month = `${defaultdate.month + 1}`;
+          }
+          this.startdata = `${defaultdate.year}-${defaultdate.month}-${defaultdate.date + 1}`;
+          this.enddata = this.startdata;
+        });
       });
       // const api = `${process.env.VUE_APP_APIPATH}/room/${this.$route.params.id}`;
       // this.$http.get(api, {
@@ -344,163 +389,166 @@ export default {
       // });
     },
     everymonth(year, month) {
-      let leap = (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
-      let monthday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-      if(leap && month === 1) {
+      const leap = (year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0);
+      const monthday = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      if (leap && month === 1) {
         return 29;
-      }else {
-        return monthday[month];
-      } 
+      }
+      return monthday[month];
     },
-    reservation () {
-      if(this.startdata === '' || this.enddata === '') return false;
+    reservation() {
+      if (this.startdata === '' || this.enddata === '') return false;
       this.date = [];
       this.holiDay = 0;
       this.normalDay = 0;
-      let startdata = {
-        year: this.startdata.split("-")[0],
-        month: this.startdata.split("-")[1],
-        day: Number(this.startdata.split("-")[2]),
-      }
-      let enddata = {
-        year: this.enddata.split("-")[0],
-        month: this.enddata.split("-")[1],
-        day: Number(this.enddata.split("-")[2]),
-      }
-      if(startdata.year===enddata.year && startdata.month===enddata.month){
-        if(startdata.day>enddata.day) {
-          alert('日期錯誤');
+      const startdata = {
+        year: this.startdata.split('-')[0],
+        month: this.startdata.split('-')[1],
+        day: Number(this.startdata.split('-')[2]),
+      };
+      const enddata = {
+        year: this.enddata.split('-')[0],
+        month: this.enddata.split('-')[1],
+        day: Number(this.enddata.split('-')[2]),
+      };
+      if (startdata.year === enddata.year && startdata.month === enddata.month) {
+        if (startdata.day > enddata.day) {
+          alert('不可小於起始日期');
           this.startdata = '';
           this.enddata = '';
-          return;
-        } else {
-          for(let i = startdata.day; i<=enddata.day; i++){
-            i < 10 ? i = `0${i}` : i = i.toString();
-            this.date.push(`${startdata.year}-${startdata.month}-${i}`);
+          return false;
+        }
+        for (let i = startdata.day; i <= enddata.day; i ++) {
+          const day = i < 10 ? i = `0${i}` : i = i.toString();
+          this.date.push(`${startdata.year}-${startdata.month}-${day}`);
+        }
+      } else if (startdata.year > enddata.year || (startdata.year === enddata.year && startdata.month > enddata.month)) {
+        alert('不可小於起始日期');
+        this.startdata = '';
+        this.enddata = '';
+        return false;
+      } else if (startdata.year === enddata.year && startdata.month < enddata.month) {
+        const lastday = this.everymonth(Number(startdata.year), Number(startdata.month - 1));
+        for (let i = startdata.day; i <= lastday; i ++) {
+          const day = i < 10 ? i = `0${i}` : i = i.toString();
+          this.date.push(`${startdata.year}-${startdata.month}-${day}`);
+        }
+        if (startdata.month < enddata.month) {
+          const startmonth = Number(startdata.month) + 1;
+          const endmonth = Number(enddata.month);
+          let stringmonth = '';
+          for (let i = startmonth; i < endmonth; i ++) {
+            const monthday = this.everymonth(Number(startdata.year), Number(i - 1));
+            if (i < 10) {
+              stringmonth = `0${i}`;
+            } else {
+              stringmonth = `${i}`;
+            }
+            for (let month = 1; month <= monthday; month ++) {
+              const day = month < 10 ? month = `0${month}` : month = month.toString();
+              this.date.push(`${startdata.year}-${stringmonth}-${day}`);
+            }
           }
         }
-      }else if(startdata.year > enddata.year || (startdata.year===enddata.year && startdata.month>enddata.month)) {
-          alert('日期錯誤');
-          this.startdata = '';
-          this.enddata = '';
-          return;
-      }else if(startdata.year===enddata.year && startdata.month<enddata.month){
-          let lastday = this.everymonth(Number(startdata.year),Number(startdata.month-1));
-          for(let i = startdata.day; i<=lastday ; i++){
-            i < 10 ? i = `0${i}` : i = i.toString();
-            this.date.push(`${startdata.year}-${startdata.month}-${i}`);
-          }
-          if (startdata.month<enddata.month){
-            let startmonth = Number(startdata.month)+1;
-            let endmonth = Number(enddata.month);
-            let stringmonth = '';
-            for (let i = startmonth; i<endmonth ; i++){
-              if (i < 10) {
-                stringmonth = `0${i}`;
-              } else {
-                stringmonth = `${i}`;
-              }
-              let lastday = this.everymonth(Number(startdata.year),Number(i-1));
-              for(let i = 1; i<=lastday ; i++){
-                i < 10 ? i = `0${i}` : i = i.toString();
-                this.date.push(`${startdata.year}-${stringmonth}-${i}`);
-              }
-            }
-          }
-          for(let i = 1; i<=enddata.day ; i++){
-            i < 10 ? i = `0${i}` : i = i.toString();
-            this.date.push(`${startdata.year}-${enddata.month}-${i}`);
-          }
+        for (let i = 1; i <= enddata.day; i ++) {
+          const day = i < 10 ? i = `0${i}` : i = i.toString();
+          this.date.push(`${startdata.year}-${enddata.month}-${day}`);
+        }
       } else if (startdata.year < enddata.year) {
-          let lastday = this.everymonth(Number(startdata.year),Number(startdata.month-1));
-          for(let i = startdata.day; i<=lastday ; i++){
-            i < 10 ? i = `0${i}` : i = i.toString();
-            this.date.push(`${startdata.year}-${startdata.month}-${i}`);
-          }
-          if (startdata.month<=12){
-            let startmonth = Number(startdata.month)+1;
-            let stringmonth = '';
-            for (let i = startmonth; i<=12 ; i++){
-              if (i < 10) {
-                stringmonth = `0${i}`;
-              } else {
-                stringmonth = `${i}`;
-              }
-              let lastday = this.everymonth(Number(startdata.year),Number(i-1));
-              for(let i = 1; i<=lastday ; i++){
-                i < 10 ? i = `0${i}` : i = i.toString();
-                this.date.push(`${startdata.year}-${stringmonth}-${i}`);
-              }
+        const lastday = this.everymonth(Number(startdata.year), Number(startdata.month - 1));
+        for (let i = startdata.day; i <= lastday; i ++) {
+          const day = i < 10 ? i = `0${i}` : i = i.toString();
+          this.date.push(`${startdata.year}-${startdata.month}-${day}`);
+        }
+        if (startdata.month <= 12) {
+          const startmonth = Number(startdata.month) + 1;
+          let stringmonth = '';
+          for (let i = startmonth; i <= 12; i ++) {
+            if (i < 10) {
+              stringmonth = `0${i}`;
+            } else {
+              stringmonth = `${i}`;
+            }
+            const monthday = this.everymonth(Number(startdata.year), Number(i - 1));
+            for (let month = 1; month <= monthday; month ++) {
+              const day = month < 10 ? month = `0${month}` : month = month.toString();
+              this.date.push(`${startdata.year}-${stringmonth}-${day}`);
             }
           }
-          if (enddata.month>=1){
-            let startmonth = 1;
-            let endmonth = Number(enddata.month) - 1;
-            let stringmonth = '';
-            for (let i = startmonth; i<=endmonth ; i++){
-              if (i < 10) {
-                stringmonth = `0${i}`;
-              } else {
-                stringmonth = `${i}`;
-              }
-              let lastday = this.everymonth(Number(enddata.year),Number(i-1));
-              for(let i = 1; i<=lastday ; i++){
-                i < 10 ? i = `0${i}` : i = i.toString();
-                this.date.push(`${enddata.year}-${stringmonth}-${i}`);
-              }
+        }
+        if (enddata.month >= 1) {
+          const startmonth = 1;
+          const endmonth = Number(enddata.month) - 1;
+          let stringmonth = '';
+          for (let i = startmonth; i <= endmonth; i ++) {
+            if (i < 10) {
+              stringmonth = `0${i}`;
+            } else {
+              stringmonth = `${i}`;
+            }
+            const monthday = this.everymonth(Number(enddata.year), Number(i - 1));
+            for (let month = 1; month <= monthday; month ++) {
+              const day = month < 10 ? month = `0${i}` : month = month.toString();
+              this.date.push(`${enddata.year}-${stringmonth}-${day}`);
             }
           }
-          for(let i = 1; i<=enddata.day ; i++){
-            i < 10 ? i = `0${i}` : i = i.toString();
-            this.date.push(`${enddata.year}-${enddata.month}-${i}`);
-          }
+        }
+        for (let i = 1; i <= enddata.day; i ++) {
+          const day = i < 10 ? i = `0${i}` : i = i.toString();
+          this.date.push(`${enddata.year}-${enddata.month}-${day}`);
+        }
       }
       this.date.forEach((item) => {
-        let week = new Date(item.split("-")[0],(item.split("-")[1]-1),item.split("-")[2]).getDay();
-        if(week===0||week===6 || week===5){
+        const week = new Date(item.split('-')[0], (item.split('-')[1] - 1), item.split('-')[2]).getDay();
+        if (week === 0 || week === 6 || week === 5) {
           this.holiDay += 1;
         } else {
           this.normalDay += 1;
         }
       });
+      return null;
     },
     checkrequest() {
-      this.$store.dispatch('updateLoading', true);
-      let formdata = new FormData();
-      formdata.append('name',this.name);
-      formdata.append('tel',this.phone);
-      this.date.forEach((item,index) => {
-        formdata.append(`date[${index}]`,item);
-      })
-      const api = `${process.env.VUE_APP_APIPATH}/room/${this.$route.params.id}`;
-      this.$http.post(api, formdata, {
-        headers: {
-          accept:'application/json',
-          authorization:`Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
-        },
-      }).then(() => {
-        this.success = true; 
-        $('#Modal1').modal('hide');
-        $('#Modal2').modal('show');
-        this.$store.dispatch('updateLoading', false);
-      }).catch((error) =>{
-        this.errormsg = error.response.data.message;
-        this.success = false;
-        $('#Modal1').modal('hide');
-        $('#Modal2').modal('show');
-        this.$store.dispatch('updateLoading', false);
+      this.$validator.validate().then((valid) => {
+        if (valid) {
+          this.$store.dispatch('updateLoading', true);
+          const formdata = new FormData();
+          formdata.append('name', this.name);
+          formdata.append('tel', this.phone);
+          this.date.forEach((item, index) => {
+            formdata.append(`date[${index}]`, item);
+          });
+          const api = `${process.env.VUE_APP_APIPATH}/room/${this.$route.params.id}`;
+          this.$http.post(api, formdata, {
+            headers: {
+              accept: 'application/json',
+              authorization: `Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
+            },
+          }).then(() => {
+            this.success = true;
+            $('#Modal1').modal('hide');
+            $('#Modal2').modal('show');
+            this.$store.dispatch('updateLoading', false);
+          }).catch((error) => {
+            this.errormsg = error.response.data.message;
+            this.success = false;
+            $('#Modal1').modal('hide');
+            $('#Modal2').modal('show');
+            this.$store.dispatch('updateLoading', false);
+          });
+        }
       });
     },
     clear() {
       const api = `${process.env.VUE_APP_APIPATH}/rooms`;
       this.$http.delete(api, {
         headers: {
-          accept:'application/json',
-          authorization:`Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
+          accept: 'application/json',
+          authorization: `Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
         },
       }).then(() => {
         this.getroom();
-      })
+      });
     },
     // showSingle(img) {
     //   this.imgs = img;
@@ -517,14 +565,14 @@ export default {
     handleHide() {
       this.visible = false;
     },
-    startday(day,hide) {
+    startday(day, hide) {
       this.startdata = day;
       this.openstart = hide;
     },
-    endday(day,hide) {
+    endday(day, hide) {
       this.enddata = day;
       this.openend = hide;
-    }
-   },
-}
+    },
+  },
+};
 </script>

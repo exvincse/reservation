@@ -21,44 +21,45 @@ export default new Vuex.Store({
       const api = `${process.env.VUE_APP_APIPATH}/rooms`;
       axios.get(api, {
         headers: {
-          'Accept':'application/json',
-          'Authorization':`Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
+          Accept: 'application/json',
+          Authorization: `Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
         },
       }).then((response) => {
-        context.commit('ALLROOM',response.data.items);
+        context.commit('ALLROOM', response.data.items);
         context.commit('LOADING', false, { root: true });
       });
     },
-    getmoreroom(context,id) {
+    getmoreroom(context, id) {
       context.commit('LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_APIPATH}/room/${id}`;
       return new Promise((resolve) => {
         axios.get(api, {
           headers: {
-            'Accept':'application/json',
-            'Authorization':`Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
+            Accept: 'application/json',
+            Authorization: `Bearer ${process.env.VUE_APP_CUSTOMPATH}`,
           },
         }).then((response) => {
-          context.commit('MOREROOM',response.data);
+          context.commit('MOREROOM', response.data);
           context.commit('LOADING', false, { root: true });
           resolve();
         });
-      })
-     }
+      });
+    },
   },
   mutations: {
-    ALLROOM(state,payload) {
+    ALLROOM(state, payload) {
       state.allroom = payload;
     },
-    MOREROOM(state,payload) {
+    MOREROOM(state, payload) {
       state.bad = [];
       payload.booking.forEach((item) => {
         state.bad.push(item.date);
-      })
-      state.moreroom = payload.room[0];
+      });
+      const ary = payload.room[0];
+      state.moreroom = ary;
     },
     LOADING(state, payload) {
-      state.isLoading = payload
+      state.isLoading = payload;
     },
   },
   getters: {
@@ -70,6 +71,6 @@ export default new Vuex.Store({
     },
     loading(state) {
       return state.isLoading;
-    }
-  }
+    },
+  },
 });

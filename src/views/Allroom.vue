@@ -3,10 +3,11 @@
     <div class="messsage">
       <div class="content p-5 linear-pos">
         <div class="white-space p-4 mx-auto">
-          White<br>Space
+          White
+          <br />Space
         </div>
         <div class="linear"></div>
-        <div class="msg d-flex justify-content-between mt-4">
+        <div class="msg d-flex flex-lg-row flex-column justify-content-between mt-4">
           <div class="link-border pr-4 mr-4">
             <a href="#" class="mr-2 link">
               <i class="fab fa-facebook-square fa-2x"></i>
@@ -33,22 +34,29 @@
       </div>
       <swiper :options="Bswiper">
         <swiper-slide v-for="item in allroom" :key="item.id">
-          <div class="room-bg" style="height:660px;"
-              :style="{backgroundImage:`url(${item.imageUrl})`}">
-          </div>
+          <div
+            class="room-bg"
+            style="height:660px;"
+            :style="{backgroundImage:`url(${item.imageUrl})`}"
+          ></div>
         </swiper-slide>
       </swiper>
     </div>
     <div class="container l-margin">
       <div class="row">
         <div class="col-lg-4 mb-5" v-for="item in allroom" :key="item.id">
-          <div class="card-pos" style="overflow: hidden; height:345px;box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);">
-            <div :style="{backgroundImage:`url(${item.imageUrl})`}"
-                  class="img-fluid room-bg"
-                  style="height:280px"></div>
+          <div
+            class="card-pos"
+            style="overflow: hidden; height:350px;box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);"
+          >
+            <div
+              :style="{backgroundImage:`url(${item.imageUrl})`}"
+              class="img-fluid room-bg"
+              style="height:280px"
+            ></div>
             <div class="trans">
-              <div class="p-4">
-                <div class="mb-3">{{item.name}}</div>
+              <div class="py-4 px-4">
+                <div class="mb-4">{{item.name}}</div>
                 <div class="kind">
                   <div class="room">
                     <span v-if="item.name==='Single Room'">單人房</span>
@@ -68,8 +76,7 @@
                 </div>
               </div>
             </div>
-            <a href="#" class="goroom"
-                @click.prevent="gomoreroom(item.id)"></a>
+            <a href="#" class="goroom" @click.prevent="gomoreroom(item.id)"></a>
           </div>
         </div>
       </div>
@@ -79,6 +86,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -86,10 +94,10 @@ export default {
         slidesPerView: 1,
         spaceBetween: 30,
         freeMode: true,
-        autoplay:true,
-        delay:3000,
+        autoplay: true,
+        delay: 3000,
       },
-    }
+    };
   },
   created() {
     this.getroom();
@@ -99,9 +107,9 @@ export default {
   },
   methods: {
     ...mapActions(['getroom']),
-    gomoreroom (id) {
-      this.$router.push(`/moreroom/${id}`)
-    }
+    gomoreroom(id) {
+      this.$router.push(`/moreroom/${id}`);
+    },
   },
 };
 </script>
