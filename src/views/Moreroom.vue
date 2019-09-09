@@ -145,7 +145,7 @@
         <div class="col-lg-4">
           <datepeacker class="mb-4"
             :bad="bad"
-            ref="datepeacker"></datepeacker>
+            ref="date"></datepeacker>
             <div class="d-flex flex-wrap">
               <span class="out d-inline-block" style="width:20px;height:20px"></span>
               <span class="d-inline-block">代表已被預約。</span>
@@ -359,7 +359,7 @@ export default {
         this.datashow = true;
         this.$store.dispatch('updateLoading', false);
         this.$nextTick(() => {
-          const defaultdate = this.$refs.datepeacker.getdate(new Date());
+          const defaultdate = this.$refs.date.getdate(new Date());
           if (defaultdate.month < 9) {
             defaultdate.month = `0${defaultdate.month + 1}`;
           } else {

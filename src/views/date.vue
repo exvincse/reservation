@@ -110,16 +110,30 @@ export default {
     },
     dayoverflow(day) {
       const now = this.getdate(new Date());
-      if ((this.nowdate.year < now.year) || (this.nowdate.year === now.year && this.nowdate.month < now.month) || (this.nowdate.month > now.month + 3 || this.nowdate.year > now.year)) {
+      let monthadd = now.month + 3;
+      let yearadd = now.year;
+      if (monthadd > 11) {
+        monthadd -= 12;
+        yearadd += 1;
+      }
+      if (this.nowdate.year === now.year && this.nowdate.month < now.month) {
         return false;
-      }
-      if (this.nowdate.month === now.month) {
+      } else if (this.nowdate.month === now.month && this.nowdate.year === now.year) {
         return Boolean(now.date <= day);
-      }
-      if (this.nowdate.month < now.month + 3 || now.date >= day) {
+      } else if ((monthadd < this.nowdate.month || now.date >= day) && this.nowdate.year === yearadd) {
+        if (this.nowdate.month > monthadd) {
+          return false;
+        }
+        return true;
+      } else if ((monthadd < this.nowdate.month || now.date >= day) && this.nowdate.year === now.year) {
+        return true;
+      } else if ((this.nowdate.month < monthadd || now.date >= day) && this.nowdate.year === yearadd) {
+        if (this.nowdate.month > monthadd) {
+          return false;
+        }
         return true;
       }
-      return null;
+      return false;
     },
     noclick(day) {
       const ary = this.bad;

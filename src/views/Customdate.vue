@@ -17,7 +17,7 @@
 
         <div class="d-flex flex-wrap justify-content-between align-items-center text-center">
             <div class="none-week datewidth"
-                v-for="i in lastMonthDays" :key="i+100" >{{lastmonthdate + i}}</div>
+              v-for="i in lastMonthDays" :key="i+100" >{{lastmonthdate + i}}</div>
             <div class="datewidth"
               v-for="day in nowmonthdate" :key="day"
               :class="{'out':noclick(day)}">
@@ -152,16 +152,30 @@ export default {
     },
     dayoverflow(day) {
       const now = this.getdate(new Date());
-      if ((this.nowdate.year < now.year) || (this.nowdate.year === now.year && this.nowdate.month < now.month) || (this.nowdate.month > now.month + 3 || this.nowdate.year > now.year)) {
+      let monthadd = now.month + 3;
+      let yearadd = now.year;
+      if (monthadd > 11) {
+        monthadd -= 12;
+        yearadd += 1;
+      }
+      if (this.nowdate.year === now.year && this.nowdate.month < now.month) {
         return false;
-      }
-      if (this.nowdate.month === now.month) {
+      } else if (this.nowdate.month === now.month && this.nowdate.year === now.year) {
         return Boolean(now.date <= day);
-      }
-      if (this.nowdate.month < now.month + 3 || now.date >= day) {
+      } else if ((monthadd < this.nowdate.month || now.date >= day) && this.nowdate.year === yearadd) {
+        if (this.nowdate.month > monthadd) {
+          return false;
+        }
+        return true;
+      } else if ((monthadd < this.nowdate.month || now.date >= day) && this.nowdate.year === now.year) {
+        return true;
+      } else if ((this.nowdate.month < monthadd || now.date >= day) && this.nowdate.year === yearadd) {
+        if (this.nowdate.month > monthadd) {
+          return false;
+        }
         return true;
       }
-      return null;
+      return false;
     },
     // noclick(day){
     //   let ary = ['2019-10-1','2019-10-3','2019-10-7'];
