@@ -68,7 +68,6 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   data() {
     return {
-      // 每個房間圖片陣列有3個元素，但是像ex:room[1]有些房間圖片太亮，所以我就不用ajax撈資料圖片
       chooseimg: [
         'https://images.unsplash.com/photo-1526880792616-4217886b9dc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
         'https://images.unsplash.com/photo-1528908929486-dfaa209c6986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
