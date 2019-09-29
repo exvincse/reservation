@@ -49,6 +49,13 @@ export default {
   },
   created() {
     this.nowdate = this.getdate(new Date());
+    let da = this.everymonth(this.nowdate.year,this.nowdate.month);
+    if (this.nowdate.date + 1 > da) {
+      this.nowdate.month += 1;
+      this.nowdate.date = 1;
+    } else {
+      this.nowdate.date += 1;
+    }
   },
   computed: {
     lastMonthDays() {

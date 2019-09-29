@@ -365,7 +365,14 @@ export default {
           } else {
             defaultdate.month = `${defaultdate.month + 1}`;
           }
-          this.startdata = `${defaultdate.year}-${defaultdate.month}-${defaultdate.date + 1}`;
+          let da = this.everymonth(defaultdate.year,Number(defaultdate.month.split("")[1])-1);
+          if (defaultdate.date + 1 > da) {
+            defaultdate.month = Number(defaultdate.month.split("")[1]) + 1 >= 10 ? Number(defaultdate.month.split("")[1]) + 1 : `${0+Number(defaultdate.month.split("")[1])}`;
+            defaultdate.date = 1;
+          } else {
+            defaultdate.date += 1;
+          }
+          this.startdata = `${defaultdate.year}-${defaultdate.month}-${defaultdate.date}`;
           this.enddata = this.startdata;
         });
       });
