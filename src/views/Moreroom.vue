@@ -180,7 +180,7 @@
           <div>
             <form class="p-4">
                 <div class="form-group d-flex flex-wrap align-items-center">
-                  <label for="inputEmail3" class="col-form-label mr-5">姓名</label>
+                  <label for="inputEmail3" class="col-form-label label-w">姓名</label>
                   <input type="text" class="form-control w-75" id="inputEmail3"
                   :class="{'is-invalid': errors.has('name')}"
                   v-model="name"
@@ -191,7 +191,7 @@
                         v-if="errors.has('name')">姓名不得為空</div>
                 </div>
                 <div class="form-group d-flex flex-wrap align-items-center">
-                  <label for="inputPassword3" class="col-form-label mr-5">電話</label>
+                  <label for="inputPassword3" class="col-form-label label-w">電話</label>
                   <input type="phone" class="form-control w-75" id="inputPassword3"
                   :class="{'is-invalid': errors.has('phone')}"
                   v-model="phone"
@@ -201,8 +201,8 @@
                 <span class="text-danger text-center w-100"
                       v-if="errors.has('phone')">電話不得為空</span>
                 </div>
-                <div class="form-group d-flex flex-wrap  date-pos">
-                  <label class="col-form-label mr-3">預約起迄</label>
+                <div class="form-group d-flex flex-wrap date-pos">
+                  <label class="col-form-label label-w">預約起迄</label>
                     <div>
                         <input type="text" class="form-control coustomdate" id="inputEmail3"
                         v-model="startdata"
@@ -219,7 +219,7 @@
                         v-if="openstart"
                         @chooseday="startday"></customdate>
                     </div>
-                    <div class="mx-3">~</div>
+                    <div class="mx-3" style="line-height:35px;">~</div>
                     <div>
                       <input type="text" class="form-control coustomdate" id="inputEmail3"
                         v-model="enddata"
@@ -286,7 +286,7 @@
             <div v-else>{{errormsg}}</div>
           </div>
           <div class="modal-footer">
-            <router-link to="/allroom" type="button" class="btn btn-secondary rounded-0" data-dismiss="modal"
+            <router-link to="/" type="button" class="btn btn-secondary rounded-0" data-dismiss="modal"
             style="background-color:#484848; color:#fff">回首頁</router-link>
           </div>
         </div>

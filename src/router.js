@@ -7,10 +7,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./views/Index'),
-    },
-    {
-      path: '/allroom',
       component: () => import('./views/Allroom'),
     },
     {
