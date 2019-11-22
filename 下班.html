@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let A = [1, 2, 2, 3, 5, 2, 9, 10];
+        let B = [0, 1, 6, 1, 4, 7, 2];
+        let two = new Set();
+        // 1.取出A陣列不重複的值
+
+        // filter
+        let OneAry = A.filter((item, index, ary) => {
+            return ary.indexOf(item) === index;
+        })
+        // forEach indexOf push
+        // let testb = []
+        // A.forEach((item) => {
+        //     if (testb.indexOf(item) === -1) {
+        //         testb.push(item);
+        //     }
+        // })
+        // console.log(testb);
+
+        // new Set return Object need for of
+        // let testc = new Set();
+        // A.forEach((item) => {
+        //     testc.add(item);
+        // })
+        // console.log(testc);
+
+        // 2.取出A陣列重複的值
+
+        // let testd = A.find((item, index, ary) => {
+        //     return ary.indexOf(item) !== index;
+        // })
+
+        // let teste = A.filter((item, index, ary) => {
+        //     return ary.indexOf(item) !== index;
+        // }).find((item, index, ary) => {
+        //     return ary.indexOf(item) !== index;
+        // })
+        // console.log(teste);
+
+        A.forEach((item, index, ary) => {
+            if (ary.indexOf(item) !== index) {
+                two.add(item);
+            }
+        })
+
+        // 3.取出 A、B陣列重複的值
+        let ThreeAry = A.filter((item, index, ary) => {
+            return B.indexOf(item) > -1;
+        }).filter((item, index, ary) => ary.indexOf(item) === index);
+
+        // 4.取出 A、B陣列不重複的值
+        let FourAry = A.filter(item => {
+            return !(B.includes(item))
+        }).concat(B.filter(item => {
+            return !(A.includes(item))
+        })).sort((a, b) => {
+            return a - b;
+        })
+        // 呈現資料
+        console.log(`A陣列${A}------B陣列${B}`);
+        console.log(`1.取出A陣列不重複的值${OneAry}`);
+        console.log(`2.取出A陣列重複的值${Array.from(two)}`);
+        console.log(`3.取出A、B陣列重複的值${ThreeAry}`);
+        console.log(`4.取出A、B陣列不重複的值${FourAry}`);
+    </script>
+</body>
+
+</html>

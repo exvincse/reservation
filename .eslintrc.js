@@ -22,24 +22,26 @@ module.exports = {
         "vue"
     ],
     "rules": {
-      "max-len": [
-        "error",
-          {
-            "code": 300
-          }
+        "max-len": [
+            "error",
+            {
+                "code": 300
+            }
         ],
-      "no-tabs": "off",
-      "no-alert": "off",
-      "no-plusplus": ['error', { "allowForLoopAfterthoughts": true }],
-      "space-unary-ops": [
-        2, {
-          "words": true,
-          "nonwords": false,
-          "overrides": {
-            "new": false,
-            "++": true
-          }
-      }],
-      "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "no-tabs": "off",
+        "indent": "off",
+        "no-alert": "off",
+        "no-plusplus": ['error', { "allowForLoopAfterthoughts": true }],
+        "space-unary-ops": [
+            2, {
+                "words": true,
+                "nonwords": false,
+                "overrides": {
+                    "new": false,
+                    "++": true
+                }
+            }
+        ],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     }
 };
